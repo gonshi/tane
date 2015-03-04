@@ -26,15 +26,9 @@ $ ->
   SPEED = 0.4
 
   #########################
-  # EVENT LISTENER
+  # PRIVATE
   #########################
-
-  #########################
-  # INIT
-  #########################
-
-  img = new Image()
-  img.onload = ->
+  _init = ->
     canvasManager.resetContext img.width, img.height
     canvasManager.drawImg img, img.width, img.height,
                           img.width, img.height, 1
@@ -60,5 +54,19 @@ $ ->
                                 img.width, t, 1 / mosaic.length * ( i + 1 )
           return
       ticker.clear "mask"
+
+  #########################
+  # EVENT LISTENER
+  #########################
+
+  #########################
+  # INIT
+  #########################
+
+  img = new Image()
+  if img.complete
+    _init()
+  else
+    img.onload = -> _init()
 
   img.src = "img/facebook.jpg?v=#{ Date.now() }"
