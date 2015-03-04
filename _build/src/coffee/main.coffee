@@ -62,4 +62,4 @@ $ ->
             return
         ticker.clear "mask"
 
-    img.src = "img/facebook.jpg?#{ Date.now() }"
+    img.src = "img/facebook.jpg?v=#{ Date.now() }"
