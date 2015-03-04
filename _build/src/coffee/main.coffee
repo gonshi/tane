@@ -35,7 +35,7 @@ $ ->
 
   img = new Image()
   img.onload = ->
-    alert 1
+    alert "start?"
     canvasManager.resetContext img.width, img.height
     canvasManager.drawImg img, img.width, img.height,
                           img.width, img.height, 1
