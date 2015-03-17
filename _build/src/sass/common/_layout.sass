@@ -2,11 +2,29 @@
   display: none
 
 body
-  +bg("bg.jpg", cover)
+  background: #ddd
 
-.canvas
+h1.ttl
   position: absolute
-  +trbl(0, 0, 0, 0)
-  width: 640px
-  height: 640px
-  margin: auto
+  +trbl(40px, 0, auto, 200px)
+  font-size: 72px
+  text-align: center
+
+.menu_container
+  position: absolute
+  +trbl(0, auto, 0, 0)
+  width: 200px
+  padding: 100px 0 0 20px
+  overflow: auto
+  background: #fff
+
+  .link
+    button
+      text-align: left
+      &:hover
+        text-decoration: underline
+
+.page_wrapper
+  display: none
+  position: absolute
+  +trbl(0, 0, 0, 200px)
