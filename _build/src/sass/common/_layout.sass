@@ -2,11 +2,54 @@
   display: none
 
 body
-  +bg("bg.jpg", cover)
+  background: #ddd
 
-.canvas
+h1.ttl
   position: absolute
-  +trbl(0, 0, 0, 0)
-  width: 640px
-  height: 640px
+  +trbl(0, 0, 0, 200px)
+  font-size: 128px
+  height: 128px
   margin: auto
+  text-align: center
+  font-weight: normal
+  color: #000
+  +translateY(-25px)
+  +open-face(#fff)
+
+.menu_container
+  position: absolute
+  +trbl(0, auto, 0, 0)
+  width: 200px
+  padding-top: 150px
+  overflow: auto
+  background: #fff
+  border-right: 2px solid #000
+
+  .ttl
+    position: absolute
+    +trbl(0, 0, auto, 0)
+    line-height: 150px
+    text-align: center
+    color: #000
+    font-size: 32px
+    font-weight: normal
+
+  .link
+    padding: 10px 20px
+    border-top: 1px solid #000
+
+    &:last-child
+      border-bottom: 1px solid #000
+
+    button
+      text-align: left
+      &:hover
+        text-decoration: underline
+
+.page_wrapper
+  display: none
+  position: absolute
+  +trbl(0, 0, 0, 200px)
+
+.killGothic
+  font-family: 'GN_KillGothic', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
