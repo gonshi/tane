@@ -15,6 +15,22 @@ module.exports = {
       dest: '<%= config.dir.dist %>/js/'
     }]
   },
+  font: {
+    files: [{
+      expand: true,
+      cwd: '<%= config.dir.src %>/font',
+      src:['**/*'],
+      dest: '<%= config.dir.tmp %>/font'
+    }]
+  },
+  fontProd: {
+    files: [{
+      expand: true,
+      cwd: '<%= config.dir.src %>/font',
+      src:['**/*'],
+      dest: '<%= config.dir.dist %>/font'
+    }]
+  },
   img: {
     files: [{
       expand: true,
