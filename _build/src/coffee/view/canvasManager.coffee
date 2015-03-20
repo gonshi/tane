@@ -4,7 +4,7 @@ class CanvasManager
     @canvas = @$canvas.get 0
     if !@canvas.getContext
       return undefined
-    @context = @canvas.getContext "2d"
+    @ctx = @canvas.getContext "2d"
 
   resetContext: ( width, height )->
     @canvas.width = width
@@ -12,15 +12,21 @@ class CanvasManager
     @$canvas.width width
     @$canvas.height height
 
-  clear: -> @context.clearRect 0, 0, @canvas.width, @canvas.height
+  clear: -> @ctx.clearRect 0, 0, @canvas.width, @canvas.height
 
-  drawImg: ( img, sw, sh, dw, dh, opacity )->
-    @context.globalCompositeOperation = "source-over"
-    @context.globalAlpha = opacity
-    @context.drawImage img, 0, 0, sw, sh, 0, 0, dw, dh
+  drawImg: ( img, x, y, sw, sh, dw, dh, opacity )->
+    @ctx.globalCompositeOperation = "source-over"
+    @ctx.globalAlpha = opacity
+    @ctx.drawImage img, 0, 0, sw, sh, x, y, dw, dh
+
+  drawIn: ( img, x, y )->
+    @ctx.save()
+    @ctx.globalCompositeOperation = "source-in"
+    @ctx.drawImage img, x, y
+    @ctx.restore()
 
   getMosaic: ( img, x_rough, y_rough )->
-    _imgData = @context.createImageData img.width, img.height
+    _imgData = @ctx.createImageData img.width, img.height
     _originImgData = @getImgData( 0, 0, img.width, img.height ).data
 
     for x in [ 0...img.width ]
@@ -34,15 +40,33 @@ class CanvasManager
     _canvas = document.createElement "canvas"
     _canvas.width = @canvas.width
     _canvas.height = @canvas.height
-    _context = _canvas.getContext( "2d" )
+    _ctx = _canvas.getContext( "2d" )
     _canvas.getContext( "2d" ).putImageData _imgData, 0, 0
     return _canvas
 
+  # for opacityGradient
+  # 横向きに、左半分はベタ塗り、
+  # 右半分はグラデーションの画を描画します
+  getGradient: ( width, height )->
+    _canvas = document.createElement "canvas"
+    _canvas.width = width
+    _canvas.height = height
+    _ctx = _canvas.getContext( "2d" )
+    _ctx.beginPath()
+    _grad = _ctx.createLinearGradient 0, 0, width, 0
+    _grad.addColorStop 0, "rgba(0, 0, 0, 1)"
+    _grad.addColorStop 0.5, "rgba(0, 0, 0, 1)"
+    _grad.addColorStop 1, "rgba(0, 0, 0, 0)"
+    _ctx.fillStyle = _grad
+    _ctx.rect 0, 0, width, height
+    _ctx.fill()
+    return _canvas
+
   getImgData: ( x, y, width, height )->
-    @context.getImageData x, y, width, height
+    @ctx.getImageData x, y, width, height
 
   getImg: -> @canvas.toDataURL()
 
-  getContext: -> @context
+  getContext: -> @ctx
 
 module.exports = CanvasManager

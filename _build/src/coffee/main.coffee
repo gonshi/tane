@@ -25,6 +25,7 @@ $ ->
 
   init =
     socialNetwork: require "./socialNetworkInit"
+    opacityGradient: require "./opacityGradientInit"
 
   ##################################
   # EVENT LISTENER
