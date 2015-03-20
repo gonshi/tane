@@ -48,5 +48,6 @@ opacityGradientInit = ->
   #########################
   # INIT
   #########################
+  canvas.clear()
 
 module.exports = opacityGradientInit
