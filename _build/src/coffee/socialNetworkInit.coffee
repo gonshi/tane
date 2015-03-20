@@ -48,6 +48,7 @@ socialNetworkInit = ->
       ticker.clear "mask"
 
   img.src = "img/facebook.jpg?_=#{ Date.now() }"
+  canvas.clear()
   ticker.clear()
 
 module.exports = socialNetworkInit
